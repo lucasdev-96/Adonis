@@ -1,12 +1,12 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import BadRequestException from 'App/Exceptions/BadRequestException'
+import User from 'App/Models/User'
 
-export default class VerifyEmail {
+export default class VerifyUsernameAlreadyExist {
   public async handle({ request }: HttpContextContract, next: () => Promise<void>) {
-    const { email } = request.only(['email'])
-    const regex = /\S+@\S+\.\S+/
-    if (!regex.test(email)) {
-      throw new BadRequestException('o email deve ser válido')
+    const user = await User.findBy('username', request.body().username)
+    if (user) {
+      throw new BadRequestException('username já cadastrado')
     }
     await next()
   }

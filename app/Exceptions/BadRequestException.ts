@@ -1,4 +1,5 @@
 import { Exception } from '@adonisjs/core/build/standalone'
+import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 /*
 |--------------------------------------------------------------------------
@@ -12,4 +13,13 @@ import { Exception } from '@adonisjs/core/build/standalone'
 | new BadRequestException('message', 500, 'E_RUNTIME_EXCEPTION')
 |
 */
-export default class BadRequestException extends Exception {}
+export default class BadRequestException extends Exception {
+  public code = 'BAD_REQUEST'
+  public status = 409
+
+  public async handle(error: this, ctx: HttpContextContract) {
+    return ctx.response
+      .status(error.status)
+      .send({ code: error.code, message: error.message, status: this.status })
+  }
+}

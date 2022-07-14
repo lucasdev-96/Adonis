@@ -27,5 +27,6 @@ Route.get('/', async () => {
 Route.post('/users', 'UsersController.store').middleware([
   'verifyPassword',
   'verifyEmail',
+  'verifyUserAlreadyExists',
   'verifyEmailAlreadyExists',
 ])
