@@ -30,3 +30,5 @@ Route.post('/users', 'UsersController.store').middleware([
   'verifyUserAlreadyExists',
   'verifyEmailAlreadyExists',
 ])
+
+Route.put('/users/:id', 'UsersController.update').middleware
