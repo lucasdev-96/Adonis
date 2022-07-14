@@ -41,4 +41,5 @@ Server.middleware.register([() => import('@ioc:Adonis/Core/BodyParser')])
 Server.middleware.registerNamed({
   verifyPassword: () => import('App/Middleware/VerifyPassword'),
   verifyEmail: () => import('App/Middleware/VerifyEmail'),
+  verifyEmailAlreadyExists: () => import('App/Middleware/VerifyEmailAlreadyExist'),
 })
