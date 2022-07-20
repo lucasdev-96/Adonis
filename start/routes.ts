@@ -35,3 +35,5 @@ Route.put('/users/:id', 'UsersController.update').middleware([
   'verifyEmail',
   'verifyEmailAlreadyExists',
 ])
+
+Route.post('/forgot-password', 'PasswordsController.forgotPassword')
